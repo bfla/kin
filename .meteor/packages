@@ -15,3 +15,4 @@ iron:router
 mike:mocha
 sacha:spin
 less
+autopublish

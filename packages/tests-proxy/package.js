@@ -9,6 +9,7 @@ Package.on_use(function (api) {
 	api.use("coffeescript", ["client", "server"]);
 	api.add_files("tests/mocha/client/sampleClientTest.js",["client"]);
 	api.add_files("tests/mocha/lib/collections/messages_spec.coffee",["server","client"]);
+	api.add_files("tests/mocha/lib/collections/verses_spec.coffee",["server","client"]);
 	api.add_files("tests/mocha/lib/permissions_spec.coffee",["server","client"]);
 	api.add_files("tests/mocha/lib/routes_spec.coffee",["server","client"]);
 	api.add_files("tests/mocha/routes_spec.coffee",["server","client"]);
