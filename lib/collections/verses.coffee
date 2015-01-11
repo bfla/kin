@@ -10,6 +10,7 @@ Meteor.methods
   verseInsert: (verseAttributes) ->
     # check Meteor.userId().toString(), String
     check verseAttributes, {text: String}
+    # check verseAttributes, {}
     
     # Validate the verse
     errors = validateVerse(verseAttributes)
@@ -21,7 +22,8 @@ Meteor.methods
       # author: user.username
       # sender: user._id # redundant but it's nice to have.
       # receiver: receiver._id
-      submittedAt: new Date()
+      updatedAt: new Date()
+      createdAt: new Date()
 
     verse = _.extend verseAttributes, extendedAttributes
     

@@ -101,7 +101,7 @@ if Verses.find().count() is 0
       text: "Test message #" + i
       author: plato.profile.name
       userId: plato._id
-      submittedAt: new Date(now - i * 3600 * 1000 + 1)
+      createdAt: new Date(now - i * 3600 * 1000 + 1)
 
     i++
 
@@ -111,7 +111,7 @@ if Verses.find().count() is 0
     sender: brian._id
     receiver: plato._id
     author: brian.profile.name
-    submittedAt: new Date(now - 10 * 3600 * 1000)
+    createdAt: new Date(now - 10 * 3600 * 1000)
 
   Verses.insert
     text: "nonsense!"
@@ -119,7 +119,7 @@ if Verses.find().count() is 0
     sender: plato._id
     receiver: brian._id
     author: plato.profile.name
-    submittedAt: new Date(now - 10.5 * 3600 * 1000)
+    createdAt: new Date(now - 10.5 * 3600 * 1000)
 
   Verses.insert
     text: "really?  I think it's da shit"
@@ -127,7 +127,7 @@ if Verses.find().count() is 0
     sender: brian._id
     receiver: plato._id
     author: brian.profile.name
-    submittedAt: new Date(now - 11 * 3600 * 1000)
+    createdAt: new Date(now - 11 * 3600 * 1000)
 
   Verses.insert 
     text: "this is a pretty long one. let's see what a message looks like" + 
@@ -140,5 +140,5 @@ if Verses.find().count() is 0
     author: brian.profile.name
     sender: brian._id
     receiver: plato._id
-    submittedAt: new Date(now - 12 * 3600 * 1000)
+    createdAt: new Date(now - 12 * 3600 * 1000)
 

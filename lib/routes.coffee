@@ -4,12 +4,12 @@ Router.configure
   notFoundTemplte: 'notFound'
 
 # Landing page (not logged in)
-Router.route '/', {name: 'index', layoutTemplate:null}
+Router.route '/', {template: 'startConversation'}
 
 # User home page
-# Router.route '/newConvo', {name: 'newConversation'}
-Router.route '/conversation', {name: 'conversation'}
-Router.route '/newVerse', {name: 'newVerse'}
+Router.route '/startConversation', { name:'startConversation' }
+Router.route '/conversation', { name: 'conversation' }
+Router.route '/newVerse', { name: 'newVerse' }
 
 # Signup screen
 # Router.route '/signup-personality', {name: 'personalitySignup'}
@@ -34,8 +34,10 @@ requireLogin = () ->
     if Meteor.loggingIn()
       this.render(this.loadingTemplate)
     else
-      this.render('accessDenied')
+      # this.render('accessDenied')
+      this.render('index')
   else
     this.next()
 
-Router.onBeforeAction(requireLogin, {only: 'newMessage'});
+# Router.onBeforeAction(requireLogin, {only: 'newMessage'})
+Router.onBeforeAction(requireLogin, {except: []})

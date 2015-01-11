@@ -1,16 +1,13 @@
 
 template(name="index")
   .row.header
-    .col-md-5.col-md-offset-1
+    .col-md-4.col-md-offset-1
       h1.logo-text.index-logo {{appName}}
-      p.lead.index-tagline
-        | Chat with nearby people about topics you're both into.
-        br
-        br
-        | Reveal your identity only if you choose to.
-        br
-        br
-        | Meet new people similar to yourself!
+      p.lead.index-tagline Chat with nearby people about topics you love. Reveal your identity only if you choose to.
+      p.text-muted (It's like Tinder for real conversations)
+      //- button.btn.btn-lg.btn-primary.facebook-login-trigger.btn-facebook Login with Facebook
       +loginButtons
+      img(src='/images/App-Store-Badge.png')
+      //- Needs Google Play badge
     .col-md-4
       p Put image here
