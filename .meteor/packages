@@ -16,3 +16,5 @@ mike:mocha
 sacha:spin
 less
 autopublish
+fortawesome:fontawesome
+service-configuration

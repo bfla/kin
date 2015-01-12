@@ -3,7 +3,7 @@ if Verses.find().count() is 0
   now = new Date().getTime()
   
   # Configure Facebook credentials
-  db.meteor_accounts_loginServiceConfiguration.insert
+  ServiceConfiguration.configurations.insert
     service : "facebook"
     appId: "607364192698630"
     secret: "184bb5c15e2e978b7689b58d473272f0"
@@ -11,7 +11,7 @@ if Verses.find().count() is 0
   # Configure facebook
   brianId = Meteor.users.insert
     # _id: "gCYke7d3rBhYSxndr"
-    createdAt: ISODate("2015-01-10T17:46:16.236Z")
+    createdAt: now
     profile:
       name: "Brian Flaherty"
     services:
@@ -28,7 +28,7 @@ if Verses.find().count() is 0
         locale: "en_US"
       resume:
         loginTokens: [
-          when: ISODate("2015-01-10T17:46:16.242Z")
+          when: now #ISODate("2015-01-10T17:46:16.242Z")
           hashedToken: "v5btdQ1eH1cfihVPt3BsXaaKr2FVUZdXr8G2sQ47zq4="
         ]
   brian = Meteor.users.findOne(brianId)  
@@ -39,7 +39,7 @@ if Verses.find().count() is 0
   # )
   platoId = Meteor.users.insert
     # _id: "rjEwi8HCLGnwC3NHJ"
-    createdAt: ISODate("2015-01-10T18:03:16.962Z")
+    createdAt: now #ISODate("2015-01-10T18:03:16.962Z")
     profile:
       name: "Plato Flaherty"
 
@@ -58,7 +58,8 @@ if Verses.find().count() is 0
 
       resume:
         loginTokens: [
-          when: ISODate("2015-01-10T18:03:16.970Z")
+          when: now
+          # when: ISODate("2015-01-10T18:03:16.970Z")
           hashedToken: "FsZmlgxV7OhjUuk4JuO1O9mW6Y3Blrg/4YEF3QzVzWc="
         ]
   
@@ -141,4 +142,37 @@ if Verses.find().count() is 0
     sender: brian._id
     receiver: plato._id
     createdAt: new Date(now - 12 * 3600 * 1000)
+
+  Starters.insert
+    text: 'Should prosecutors press charges against General Patreus?'
+    typology:'guardians'
+    topic:'currentEvents'
+  Starters.insert
+    text: 'What\'s the most awesome place you\'ve ever traveled to?'
+    typology:'explorers' 
+    topic:'travel'
+  Starters.insert
+    text: 'What causes you to feel Eudomonia (feeling happy and melancholy at the same time)?'
+    typology:'dreamers' 
+    topic:'emotions'
+  Starters.insert
+    text: 'Is capitalism merely a form indentured servitude? What might be a better system?'
+    typology:'analysts' 
+    topic:'socialTheory'
+  Starters.insert
+    text: 'Should prosecutors press charges against General Patreus?'
+    typology:'guardians' 
+    topic:'news'
+  Starters.insert
+    text: 'Describe in detail the best orgasm you\'ve ever had'
+    typology:'explorers' 
+    topic:'travel'
+  Starters.insert
+    text: 'Should I try LSD?'
+    typology:'dreamers'
+    topic:'reality'
+  Starters.insert
+    text: 'Pros and cons of humanistic athiesm vs. other belief systems?'
+    typology:'analysts'
+    topic:'socialTheory'
 

@@ -1,0 +1,12 @@
+template(name='conversationStarter')
+  div(class="conversation-starter {{typology}}-conversation-starter")
+    .text-center
+      i(class="conversation-starter-icon  {{ fontAwesomeClasses }} fa-4x")
+    //- h5.conversation-starter-heading.text-center {{topic}}
+    .conversation-starter-text-container
+      p.text-muted.conversation-starter-text.text-center= text
+      p.text-center
+      //- i.fa.fa-close.fa-2x.conversation-starter-btn(class="conversation-starter-btn-{{typology}}")
+      //- | &nbsp; &nbsp; &nbsp;
+    .text-center
+      i.fa.fa-check.fa-2x.conversation-starter-btn(class="conversation-starter-btn-{{typology}}")

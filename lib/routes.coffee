@@ -4,10 +4,10 @@ Router.configure
   notFoundTemplte: 'notFound'
 
 # Landing page (not logged in)
-Router.route '/', {template: 'startConversation'}
+Router.route '/', {template: 'newConversation'}
 
 # User home page
-Router.route '/startConversation', { name:'startConversation' }
+Router.route '/startConversation', { name:'newConversation' }
 Router.route '/conversation', { name: 'conversation' }
 Router.route '/newVerse', { name: 'newVerse' }
 
