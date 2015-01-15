@@ -18,3 +18,5 @@ less
 autopublish
 fortawesome:fontawesome
 service-configuration
+mdg:geolocation
+mizzao:user-status

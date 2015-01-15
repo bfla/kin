@@ -5,8 +5,8 @@ if Verses.find().count() is 0
   # Configure Facebook credentials
   ServiceConfiguration.configurations.insert
     service : "facebook"
-    appId: "607364192698630"
-    secret: "184bb5c15e2e978b7689b58d473272f0"
+    appId: Meteor.settings.facebook.appId
+    secret: Meteor.settings.facebook.secret
 
   # Configure facebook
   brianId = Meteor.users.insert

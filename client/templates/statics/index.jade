@@ -2,12 +2,33 @@
 template(name="index")
   .row.header
     .col-md-4.col-md-offset-1
+      //- h1.logo-text.index-logo {{appName}}
+      //- p.lead.index-tagline Chat with nearby people about topics you love. Meet likeminded people. Reveal your identity only if you choose to.
       h1.logo-text.index-logo {{appName}}
-      p.lead.index-tagline Chat with nearby people about topics you love. Meet likeminded people. Reveal your identity only if you choose to.
-      //- p.text-muted (It's like Tinder for real conversations)
-      //- button.btn.btn-lg.btn-primary.facebook-login-trigger.btn-facebook Login with Facebook
-      +loginButtons
-      img(src='/images/App-Store-Badge.png')
-      //- Needs Google Play badge
-    .col-md-4
-      p Put image here
+      p.lead.index-tagline 
+        | Become best friends with anyone. Meet someone new nearby or try it with a friend, your sister, your boyfriend, anyone.
+        //- || It's all based on psychological research about how people connect.
+        //- p 
+        //- Learn more about the science -->
+        //- p.text-muted (It's like Tinder for real conversations)
+        //- button.btn.btn-lg.btn-primary.facebook-login-trigger.btn-facebook Login with Facebook
+        +loginButtons
+        img(src='/images/App-Store-Badge.png')
+        //- Needs Google Play badge
+  //- .row
+  //-   .col-md-8.col-md-offset-2
+  //-     h2.text-center.text-muted The theory of 36
+  //-     p.lead.text-center
+  //-       | During the 1970s, psychologists discovered something interesting.
+  //-       | In laboratory experiments, they could entice two strangers to fall in love by following a simple process.
+  //-       br
+  //-       | The strangers would be given a series of 36 questions to answer together. 
+  //-       | The questions gradually got more intimate and personal.
+  //-       br
+  //-       br
+  //-       | Step 37 was for the two people to stare into each other's eyes for exactly 4 minutes. 
+  //-       | 90% of the subjects reported falling in love and 30% were still in relationships. 
+  //-       br
+  //-       br
+  //-       | Would you care to try it for yourself with a stranger nearby?
+  //-       a(href="#") Try it for free.
