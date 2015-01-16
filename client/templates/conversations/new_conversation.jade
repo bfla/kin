@@ -1,4 +1,9 @@
 template(name="newConversation")
+  .row  
+    .col-md-12
+      if currentLocation
+        p {{latitude}}
+        p {{longitude}}
   .col-md-12
     .col-md-6.col-md-offset-3
       p.text-center.text-muted Happy {{dayOfWeek}}
@@ -6,7 +11,6 @@ template(name="newConversation")
         | To start chatting, write your conversation starter or use one of ours
     form.col-md-6.col-md-offset-3
       textarea.form-control.new-conversation-text-area.new-conversation-trigger(placeholder="What would you love to talk about right now?" rows='4')
-
   .row
     .col-md-1.conversation-starter-row
       if shouldShowPrevChevron
