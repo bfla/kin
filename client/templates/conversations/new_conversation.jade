@@ -12,9 +12,10 @@ template(name="newConversation")
       if shouldShowPrevChevron
         i.fa.fa-chevron-left.fa-4x.conversation-starter-chevron.prev-starters-trigger
     .col-md-10.conversation-starter-row
-      each currentConversationStarters
-        .col-md-3
-          +conversationStarter
+      //- if currentConversationStarters
+      //-   each currentConversationStarters
+      //-     .col-md-3
+      //-       +conversationStarter
     .col-md-1.conversation-starter-row
       if shouldShowNextChevron
         i.fa.fa-chevron-right.fa-4x.conversation-starter-chevron.next-starters-trigger

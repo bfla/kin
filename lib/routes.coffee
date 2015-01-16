@@ -11,6 +11,9 @@ Router.route '/startConversation', { name:'newConversation' }
 Router.route '/conversation', { name: 'conversation' }
 Router.route '/newVerse', { name: 'newVerse' }
 
+# Admin home page
+Router.route '/admin', {name: 'admin'}
+
 # Signup screen
 # Router.route '/signup-personality', {name: 'personalitySignup'}
 

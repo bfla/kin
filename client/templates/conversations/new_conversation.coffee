@@ -8,7 +8,8 @@ Template.newConversation.helpers
     dayOfWeek = days[d.getDay()]
     return dayOfWeek
   currentConversationStarters: () ->
-    starters = Starters.find({}, {limit: 4})
+    starters = Meteor.subscribe('starters')
+    return starters
 
   # shouldShowPrevChevron: () ->
   #   i = Session.get('startersIndex')
