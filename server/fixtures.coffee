@@ -39,7 +39,7 @@ if Verses.find().count() is 0
   # )
   platoId = Meteor.users.insert
     # _id: "rjEwi8HCLGnwC3NHJ"
-    createdAt: now #ISODate("2015-01-10T18:03:16.962Z")
+    createdAt: new Date() #ISODate("2015-01-10T18:03:16.962Z")
     profile:
       name: "Plato Flaherty"
 
@@ -67,6 +67,33 @@ if Verses.find().count() is 0
   #   name: "Plato"
   # )
   plato = Meteor.users.findOne(platoId)
+
+  # salomeId = Meteor.users.insert
+
+  #   createdAt: new Date()
+  #   profile:
+  #     name: "Lou Salome"
+
+  #   services:
+  #     facebook:
+  #       accessToken: "CAAIoZAP70gQYBAL9zMFJpqmqZBPrW0ZAyIMkNhSXtjmTjrpXGrJpHYvf4uXDD15fMyodiqMRZAHzQX2ZBxJtmlp0JXI61Aselt1gLWlGoN611wSoAuZBQbZBMwOM2mwJGDVZAZCsNTm6YBJZBFJHutCZBDgsOywuH4RBuBdNAZCMidQJD7CrCCcJQClsYngGwAAr6gdIZAKmoEDqiTluYMI7b5l82"
+  #       expiresAt: 1426096995822
+  #       id: "1617711891785708"
+  #       email: "brianflaherty64@gmail.com"
+  #       name: "Lou Salome"
+  #       first_name: "Lou"
+  #       last_name: "Salome"
+  #       link: "https://www.facebook.com/app_scoped_user_id/1617711891785708/"
+  #       gender: "female"
+  #       locale: "en_US"
+
+  #     resume:
+  #       loginTokens: [
+  #         when: now
+  #         # when: ISODate("2015-01-10T18:03:16.970Z")
+  #         hashedToken: "FsZmlgxV7OhjUuk4JuO1O9mW6Y3Blrg/4YEF3QzVzWc="
+  #       ]
+
 
   
   # If we need related models/docs, we can follow this pattern...
@@ -145,34 +172,50 @@ if Verses.find().count() is 0
 
   Starters.insert
     text: 'Should prosecutors press charges against General Patreus?'
-    typology:'guardians'
-    topic:'currentEvents'
+    phase: 1
+    createdAt: new Date()
+    # typology:'guardians'
+    # topic:'currentEvents'
   Starters.insert
     text: 'What\'s the most awesome place you\'ve ever traveled to?'
-    typology:'explorers' 
-    topic:'travel'
+    phase: 1
+    createdAt: new Date()
+    # typology:'explorers' 
+    # topic:'travel'
   Starters.insert
     text: 'What causes you to feel Eudomonia (feeling happy and melancholy at the same time)?'
-    typology:'dreamers' 
-    topic:'emotions'
+    phase: 1
+    createdAt: new Date()
+    # typology:'dreamers' 
+    # topic:'emotions'
   Starters.insert
     text: 'Is capitalism merely a form indentured servitude? What might be a better system?'
-    typology:'analysts' 
-    topic:'socialTheory'
+    phase: 2
+    createdAt: new Date()
+    # typology:'analysts' 
+    # topic:'socialTheory'
   Starters.insert
     text: 'Should prosecutors press charges against General Patreus?'
-    typology:'guardians' 
-    topic:'news'
+    phase: 2
+    createdAt: new Date()
+    # typology:'guardians' 
+    # topic:'news'
   Starters.insert
     text: 'Describe in detail the best orgasm you\'ve ever had'
-    typology:'explorers' 
-    topic:'travel'
+    phase: 2
+    createdAt: new Date()
+    # typology:'explorers' 
+    # topic:'travel'
   Starters.insert
     text: 'Should I try LSD?'
-    typology:'dreamers'
-    topic:'reality'
+    phase: 3
+    createdAt: new Date()
+    # typology:'dreamers'
+    # topic:'reality'
   Starters.insert
     text: 'Pros and cons of humanistic athiesm vs. other belief systems?'
-    typology:'analysts'
-    topic:'socialTheory'
+    phase: 3
+    createdAt: new Date()
+    # typology:'analysts'
+    # topic:'socialTheory'
 

@@ -4,15 +4,25 @@ Router.configure
   notFoundTemplte: 'notFound'
 
 # Landing page (not logged in)
-Router.route '/', {template: 'newConversation'}
+Router.route '/', {template: 'newKinship'}
 
 # User home page
 Router.route '/startConversation', { name:'newConversation' }
 Router.route '/conversation', { name: 'conversation' }
+Router.route '/newKinship', {name: 'newKinship'}
 Router.route '/newVerse', { name: 'newVerse' }
 
 # Admin home page
 Router.route '/admin', {name: 'admin'}
+
+
+options =
+  waitOn: () ->
+    Meteor.subscribe('matches')
+  name: 'meetSomeoneNew'
+
+Router.route '/meetSomeoneNew', options
+
 
 # Signup screen
 # Router.route '/signup-personality', {name: 'personalitySignup'}
