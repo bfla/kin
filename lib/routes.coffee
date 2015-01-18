@@ -13,34 +13,14 @@ Router.route '/newKinship', {name: 'newKinship'}
 Router.route '/newVerse', { name: 'newVerse' }
 
 # Admin home page
+# redFlag - Make sure admin is secure before adding anything sensitive to it!
 Router.route '/admin', {name: 'admin'}
-
 
 options =
   waitOn: () ->
-    Meteor.subscribe('matches')
-  name: 'meetSomeoneNew'
+    Meteor.subscribe('getMatchesNearby')
 
-Router.route '/meetSomeoneNew', options
-
-
-# Signup screen
-# Router.route '/signup-personality', {name: 'personalitySignup'}
-
-# ConversationController = RouteController.extend
-#   template: 'conversation'
-#   increment: 5
-#   postsLimit: -> return parseInt(@params.messagesLimit) || @increment
-#   findOptions: -> return {sort: this.sort, limit: this.messagesLimit()}
-#   subscriptions: -> @conversationSub = Meteor.subscribe('conversation', this.findOptions())
-#   messages: -> return Messages.find({}, @findOptions())
-#   data: ->
-#     hasMore = @messages().count() is @messagesLimit()
-#     res =
-#       messages: @messages()
-#       ready: @conversationSub.ready
-#       # nextPath: hasMore ? @nextPath() : null
-#     return res
+Router.route '/nearbyMatches', options
 
 requireLogin = () ->
   if !Meteor.user()

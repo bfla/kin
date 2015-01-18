@@ -69,5 +69,25 @@ Schema.Verse = new SimpleSchema
   createdAt:
     type: Date
 
+Schema.Checkin = new SimpleSchema
+  userId:
+    type: Object
+  createdAt:
+    type: Date
+  updatedAt:
+    type: Date
+  geojson:
+    type: Object
+  "geojson.$.type":
+    type: String
+    allowedValues: ["Feature"]
+  "geojson.$.geometry":
+    type: Object
+  "geojson.$.geometry.$.type":
+    type: String
+    allowedValues: ["Point"]
+  "geojson.$.geometry.$.coordinates":
+    type: [Object]
+
 
 

@@ -42,18 +42,18 @@ _addChapterToStoryAndReturnStory = (storyObj, starterId, starterText) ->
   newChapter.updatedAt = new Date()
 
 # This method should add a verse to a story given a userId and text
-_addVerseToStoryAndReturnStory = (storyId, userId, textContent) ->
-  validateVerse(textContent)
+_addVerseToStoryAndReturnStory = (storyId, userId, verseText) ->
+  validateVerse(verseText)
   newVerse = {}
-  newVerse.textContent = textContent
+  newVerse.text = verseText
   newVerse.createdAt = new Date()
   newVerse.updatedAt = new Date()
 
   story = Stories.find({_id: storyId})
 
-Meteor.methods.addVerseToStoryAndUpdateStory = (storyId, userId, textContent) ->
+Meteor.methods.addVerseToStoryAndUpdateStory = (storyId, userId, verseText) ->
   story = Stories.find({_id: storyId, userIds: {$elemMatch: userId} })
-  story = _addVerseToStoryAndReturnStory(storyId, userId, textContent)
+  story = _addVerseToStoryAndReturnStory(storyId, userId, verseText)
 
 
 
