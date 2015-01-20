@@ -2,16 +2,18 @@
 
 Schema.Story = new SimpleSchema
   userIds:
-    type: [Object]
+    type: [String]
     label: "The 2 users communicating in this exchange"
   checkedBy:
-    type: [Object]
+    type: [String]
     optional: true
     label: "Which user accepted this story"
   rejectedBy: 
-    type: [Object]
+    type: [String]
     optional: true
     label: "Which users rejected this story"
+  newMatch:
+    type: Boolean
   usersAreKin:
     type: Boolean
   createdAt:
@@ -54,13 +56,15 @@ Schema.Starter = new SimpleSchema
     label: "The level of vulnerability for this question. Higher means more intimate."
   createdAt:
     type: Date
+  updatedAt:
+    type: Date
 
 Schema.Verse = new SimpleSchema
   author:
-    type: Object
+    type: String
     label: "The user who authored the verse (message)"
   reader:
-    type: Object
+    type: String
     label: "The user who received the verse (message)"
   text:
     type: String
@@ -71,7 +75,7 @@ Schema.Verse = new SimpleSchema
 
 Schema.Checkin = new SimpleSchema
   userId:
-    type: Object
+    type: String
   createdAt:
     type: Date
   updatedAt:

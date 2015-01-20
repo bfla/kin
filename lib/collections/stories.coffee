@@ -16,6 +16,7 @@ Meteor.methods.createStoryFromUsersAndStarter = (userIds, starterId, starterText
     checkedBy: []
     rejectedBy: []
     usersAreKin: false
+    newMatch: true
     createdAt: new Date()
     updatedAt: new Date()
     # To make it easy to order our stories, let's track when things are added.

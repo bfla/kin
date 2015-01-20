@@ -1,5 +1,5 @@
 # Fixture data 
-if Verses.find().count() is 0
+if Meteor.users.find().count() is 0
   now = new Date().getTime()
   
   # Configure Facebook credentials
@@ -28,7 +28,8 @@ if Verses.find().count() is 0
         locale: "en_US"
       resume:
         loginTokens: [
-          when: now #ISODate("2015-01-10T17:46:16.242Z")
+          # when: now #ISODate("2015-01-10T17:46:16.242Z")
+          when: new Date()
           hashedToken: "v5btdQ1eH1cfihVPt3BsXaaKr2FVUZdXr8G2sQ47zq4="
         ]
   brian = Meteor.users.findOne(brianId)  
@@ -58,16 +59,42 @@ if Verses.find().count() is 0
 
       resume:
         loginTokens: [
-          when: now
+          # when: now
           # when: ISODate("2015-01-10T18:03:16.970Z")
+          when: new Date()
           hashedToken: "FsZmlgxV7OhjUuk4JuO1O9mW6Y3Blrg/4YEF3QzVzWc="
         ]
+
+  if Meteor.users.find().count < 2
+    console.log "Failed to add fixture users. Update da fixtures."
   
   # platoId = Meteor.users.insert(profile:
   #   name: "Plato"
   # )
   plato = Meteor.users.findOne(platoId)
 
+  brianCheckinId = Checkins.insert
+    userId: brianId
+    createdAt: new Date()
+    updatedAt: new Date()
+    geojson:
+      type: "Feature"
+      geometry:
+        type: "Point"
+        coordinates: [42.2814, -83.7483]
+
+  platoCheckinId = Checkins.insert
+    userId: platoId
+    createdAt: new Date()
+    updatedAt: new Date()
+    geojson:
+      type: "Feature"
+      geometry:
+        type: "Point"
+        coordinates: [42.2815, -83.7484]
+
+  if Checkins.find().count < 2
+    console.log "Failed to add fixture checkins. Update da fixtures."
   # salomeId = Meteor.users.insert
 
   #   createdAt: new Date()
@@ -123,99 +150,109 @@ if Verses.find().count() is 0
   #   submitted: new Date(now - 3 * 3600 * 1000)
   #   body: "You sure can Tom!"
   # let's generate a bunch of unrealistic test verses...
-  i = 0
-  while i < 10
-    Verses.insert
-      text: "Test message #" + i
-      author: plato.profile.name
-      userId: plato._id
-      createdAt: new Date(now - i * 3600 * 1000 + 1)
+  # i = 0
+  # while i < 10
+  #   Verses.insert
+  #     text: "Test message #" + i
+  #     author: plato.profile.name
+  #     userId: plato._id
+  #     createdAt: new Date(now - i * 3600 * 1000 + 1)
 
-    i++
+  #   i++
 
-  Verses.insert
-    text: "what do you think about Dobrowsky's theory of positive disintegration"
-    userId: brian._id
-    sender: brian._id
-    receiver: plato._id
-    author: brian.profile.name
-    createdAt: new Date(now - 10 * 3600 * 1000)
+  # Verses.insert
+  #   text: "what do you think about Dobrowsky's theory of positive disintegration"
+  #   userId: brian._id
+  #   sender: brian._id
+  #   receiver: plato._id
+  #   author: brian.profile.name
+  #   createdAt: new Date(now - 10 * 3600 * 1000)
 
-  Verses.insert
-    text: "nonsense!"
-    userId: plato._id
-    sender: plato._id
-    receiver: brian._id
-    author: plato.profile.name
-    createdAt: new Date(now - 10.5 * 3600 * 1000)
+  # Verses.insert
+  #   text: "nonsense!"
+  #   userId: plato._id
+  #   sender: plato._id
+  #   receiver: brian._id
+  #   author: plato.profile.name
+  #   createdAt: new Date(now - 10.5 * 3600 * 1000)
 
-  Verses.insert
-    text: "really?  I think it's da shit"
-    userId: brian._id
-    sender: brian._id
-    receiver: plato._id
-    author: brian.profile.name
-    createdAt: new Date(now - 11 * 3600 * 1000)
+  # Verses.insert
+  #   text: "really?  I think it's da shit"
+  #   userId: brian._id
+  #   sender: brian._id
+  #   receiver: plato._id
+  #   author: brian.profile.name
+  #   createdAt: new Date(now - 11 * 3600 * 1000)
 
-  Verses.insert 
-    text: "this is a pretty long one. let's see what a message looks like" + 
-          "when it's really really long. like if I were telling someone about" +
-           "the 1000 petal lotus or the Bubble Meditation. or maybe the 3-card Tarot" +
-           "card spread that I did last. Or the stack of weird books on my table." + 
-           "or maybe my newest creative project, like my effort to bring a speech-controlled" +
-           "platform to Raspberry Pi"
-    userId: brian._id
-    author: brian.profile.name
-    sender: brian._id
-    receiver: plato._id
-    createdAt: new Date(now - 12 * 3600 * 1000)
+  # Verses.insert 
+  #   text: "this is a pretty long one. let's see what a message looks like" + 
+  #         "when it's really really long. like if I were telling someone about" +
+  #          "the 1000 petal lotus or the Bubble Meditation. or maybe the 3-card Tarot" +
+  #          "card spread that I did last. Or the stack of weird books on my table." + 
+  #          "or maybe my newest creative project, like my effort to bring a speech-controlled" +
+  #          "platform to Raspberry Pi"
+  #   userId: brian._id
+  #   author: brian.profile.name
+  #   sender: brian._id
+  #   receiver: plato._id
+  #   createdAt: new Date(now - 12 * 3600 * 1000)
 
   Starters.insert
     text: 'Should prosecutors press charges against General Patreus?'
-    phase: 1
+    connectionLevel: 1
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'guardians'
     # topic:'currentEvents'
   Starters.insert
     text: 'What\'s the most awesome place you\'ve ever traveled to?'
-    phase: 1
+    connectionLevel: 1
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'explorers' 
     # topic:'travel'
   Starters.insert
     text: 'What causes you to feel Eudomonia (feeling happy and melancholy at the same time)?'
-    phase: 1
+    connectionLevel: 1
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'dreamers' 
     # topic:'emotions'
   Starters.insert
     text: 'Is capitalism merely a form indentured servitude? What might be a better system?'
-    phase: 2
+    connectionLevel: 2
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'analysts' 
     # topic:'socialTheory'
   Starters.insert
     text: 'Should prosecutors press charges against General Patreus?'
-    phase: 2
+    connectionLevel: 2
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'guardians' 
     # topic:'news'
   Starters.insert
     text: 'Describe in detail the best orgasm you\'ve ever had'
-    phase: 2
+    connectionLevel: 2
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'explorers' 
     # topic:'travel'
   Starters.insert
     text: 'Should I try LSD?'
-    phase: 3
+    connectionLevel: 3
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'dreamers'
     # topic:'reality'
   Starters.insert
     text: 'Pros and cons of humanistic athiesm vs. other belief systems?'
-    phase: 3
+    connectionLevel: 3
     createdAt: new Date()
+    updatedAt: new Date()
     # typology:'analysts'
     # topic:'socialTheory'
+  if Starters.find().count < 8
+    console.log "Failed to add fixture starters. Update da fixtures."
 

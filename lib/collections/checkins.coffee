@@ -9,7 +9,6 @@ Checkins.attachSchema(Schema.Checkin) # Validate the Story against our schema
 
 Meteor.methods.checkinInsert = (checkinAttributes) ->
   userId = Meteor.userId() # Only the user can edit edit their checkin data
-  
   # It must have a latitude and longitude
   check checkinAttributes, 
     latitude: Number

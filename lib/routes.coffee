@@ -17,8 +17,8 @@ Router.route '/newVerse', { name: 'newVerse' }
 Router.route '/admin', {name: 'admin'}
 
 options =
-  waitOn: () ->
-    Meteor.subscribe('getMatchesNearby')
+  name: 'nearbyMatches'
+  waitOn: () -> Meteor.subscribe('getMatchesNearby')
 
 Router.route '/nearbyMatches', options
 
