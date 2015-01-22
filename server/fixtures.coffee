@@ -75,6 +75,7 @@ if Meteor.users.find().count() is 0
 
   brianCheckinId = Checkins.insert
     userId: brianId
+    gender: brian.services.facebook.gender
     createdAt: new Date()
     updatedAt: new Date()
     geojson:
@@ -85,6 +86,7 @@ if Meteor.users.find().count() is 0
 
   salomeCheckinId = Checkins.insert
     userId: salomeId
+    gender: brian.services.facebook.gender
     createdAt: new Date()
     updatedAt: new Date()
     geojson:

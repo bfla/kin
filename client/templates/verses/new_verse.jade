@@ -1,7 +1,6 @@
 template(name='newVerse')
-  .col-md-offset-3.col-md-6
-    form.form
-      .col-md-12.form-group
-        textarea#text.form-control.verse-textarea(name='text' placeholder='Spill it')
-      .col-md-12.text-center
-        button.btn.btn-primary(type="submit") Send
+  form.form#new-verse-form
+    .col-md-12.form-group
+      textarea#text.form-control.verse-textarea(name='text' placeholder='Spill it')
+    .col-md-12.text-center
+      button.btn.btn-primary(type="submit") Send

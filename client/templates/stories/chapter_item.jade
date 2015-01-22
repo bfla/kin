@@ -1,8 +1,15 @@
 template(name="chapterItem")
-  .col-md-6.col-md-offset-3
-    +starterItem starter
-    each verses
-      +verseItem
+  .row
+    .col-md-6.col-md-offset-3.pad-top-md
+      +starterItem starter
+  each verses
+    .row
+      .col-md-6.col-md-offset-3.pad-top-md
+        +verseItem
+  if shouldDisplayNewVerseForm
+    .row
+      .col-md-6.col-md-offset-3.pad-top-md
+        +newVerse
     //- +
     //- i.fa.fa-question.fa-4x.starter-icon
     //- | {{starter.text}}
