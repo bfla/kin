@@ -15,9 +15,9 @@ iron:router
 mike:mocha
 sacha:spin
 less
-fortawesome:fontawesome
 service-configuration
 mizzao:user-status
 mrt:geolocation
 mdg:geolocation
 aldeed:collection2
+fortawesome:fontawesome

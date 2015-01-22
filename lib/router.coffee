@@ -3,31 +3,20 @@ Router.configure
   loadingTemplate: 'loading'
   notFoundTemplte: 'notFound'
 
-# Landing page (not logged in)
-Router.route '/', {template: 'newKinship'}
-
-# User home page
-# Router.route '/startConversation', { name:'newConversation' }
-# Router.route '/conversation', { name: 'conversation' }
-Router.route '/newKinship', {name: 'newKinship'}
-# Router.route '/newVerse', { name: 'newVerse' }
-
-# Admin home page
-# redFlag - Make sure admin is secure before adding anything sensitive to it!
-# Router.route '/admin', {name: 'admin'}
-
-options = {}
-options.name = 'nearbyMatches'
-options.template = 'nearbyMatches'
-options.waitOn = () -> Meteor.subscribe('getMatchesNearby', Meteor.userId() )
-options.stories = () ->
+matcherOptions = {}
+matcherOptions.template = 'nearbyMatches'
+matcherOptions.waitOn = () -> Meteor.subscribe('getMatchesNearby', Meteor.userId() )
+matcherOptions.stories = () ->
   # redFlag - this is returning the wrong data...
   stories = Stories.find()
   # stories = Meteor.subscribe('getMatchesNearby', Meteor.userId() )
   return stories
-options.data = () -> {stories: options.stories()}
+matcherOptions.data = () -> {stories: matcherOptions.stories()}
 
-Router.route '/nearbyMatches', options
+Router.route '/', matcherOptions
+
+matcherOptions.name = 'nearbyMatches'
+Router.route '/nearbyMatches', matcherOptions
 
 requireLogin = () ->
   if !Meteor.user()

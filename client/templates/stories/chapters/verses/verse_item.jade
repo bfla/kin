@@ -2,7 +2,7 @@ template(name="verseItem")
   .col-md-12
       if verseBelongsToUser
         .well.user-verse
-          p.text-center.text-muted
+          p.text-muted
             i.fa.fa-user.fa-2x.user-verse-icon.pull-left
             =text
       else
@@ -10,10 +10,10 @@ template(name="verseItem")
           .well.male-verse
             p
               =text
-              i.fa.fa-male.fa-2x.male-verse-icon.pull-right
+              i.fa.fa-mars.fa-2x.male-verse-icon.pull-right
         else
           .well.female-verse
             p
               =text
-              i.fa.fa-female.fa-2x.female-verse-icon.pull-right
+              i.fa.fa-venus.fa-2x.female-verse-icon.pull-right
 
