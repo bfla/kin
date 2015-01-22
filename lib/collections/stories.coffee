@@ -11,32 +11,6 @@ Stories.allow
 
 # redFlag - this should whitelist which paramters a user can and cannot update...
 
-Meteor.methods.createStoryFromUsersAndStarter = (userIds, starterId, starterText) ->
-    # check options.users[0], String
-    # check storyAttributes.users[1] String
-  
-  newStory =
-    userIds: userIds
-    chapters: []
-    checkedBy: []
-    rejectedBy: []
-    usersAreKin: false
-    newMatch: true
-    createdAt: new Date()
-    updatedAt: new Date()
-    # To make it easy to order our stories, let's track when things are added.
-    latestChapterAddedAt: new Date()
-    latestStarterAddedAt: new Date()
-    latestVerseAddedAt: null
-
-  newStory = _addChapterToStoryAndReturnStory(newStory, starterId, starterText)
-  
-  Stories.insert newStory, (err, status) ->
-    if err
-      err.invalidKeys
-    else
-      return status 
-
 # This method takes two userIds, a storyId, and a starterId to create a new chapter in a story.
 # A chapter contains a conversation starter and any answers for that conversation starter.
 _addChapterToStoryAndReturnStory = (storyObj, starterId, starterText) ->
@@ -47,19 +21,50 @@ _addChapterToStoryAndReturnStory = (storyObj, starterId, starterText) ->
   newChapter.createdAt = new Date()
   newChapter.updatedAt = new Date()
 
-# This method should add a verse to a story given a userId and text
-_addVerseToStoryAndReturnStory = (storyId, userId, verseText) ->
-  validateVerse(verseText)
-  newVerse = {}
-  newVerse.text = verseText
-  newVerse.createdAt = new Date()
-  newVerse.updatedAt = new Date()
+Meteor.methods
+  addVerseToStoryAndUpdateStory: (params) ->
+    user = Meteor.user()
+    # Validate that the story exists and the user is a part to it.
+    story = Stories.find({_id: params.storyId, userIds: {$elemMatch: user._id} })
 
-  story = Stories.find({_id: storyId})
+    # Construct the verse
+    verse = {}
+    verse.author = user._id
+    verse.receiver = _.without(story.userIds, [user._id])[0]
+    verse.gender = user.services.facebook.gender
+    verse.createdAt = new Date()
+    verse.text = params.verseText
+    
+    # Add the verse to the last chapter on the story
+    i = story.chapters.count() - 1
+    story.chapters[i].verses.push(verse)
+    story.update({_id: story._id}, {chapters: story.chapters})
 
-addVerseToStoryAndUpdateStory = (storyId, userId, verseText) ->
-  story = Stories.find({_id: storyId, userIds: {$elemMatch: userId} })
-  story = _addVerseToStoryAndReturnStory(storyId, userId, verseText)
+    # Stories.update({_id: storyId}, {chapters: {position: i} })
+
+  # params: userIds, starterId, starterText
+  createStoryFromUsersAndStarter = (params) ->
+    newStory =
+      userIds: params.userIds
+      chapters: []
+      checkedBy: []
+      rejectedBy: []
+      usersAreKin: false
+      newMatch: true
+      createdAt: new Date()
+      updatedAt: new Date()
+      # To make it easy to order our stories, let's track when things are added.
+      latestChapterAddedAt: new Date()
+      latestStarterAddedAt: new Date()
+      latestVerseAddedAt: null
+
+    newStory = _addChapterToStoryAndReturnStory(newStory, params.starterId, params.starterText)
+    
+    Stories.insert newStory, (err, status) ->
+      if err
+        err.invalidKeys
+      else
+        return status 
 
 
 

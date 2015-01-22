@@ -1,13 +1,29 @@
+@user-color: rgb(89,75,108);
+@male-color: rgb(66,157,209);
+@female-color: rgb(234,76,137);
+
 .user-verse-icon {
-  color: rgb(89,75,108);
+  color: @user-color;
 }
 
 .male-verse-icon {
-  color: rgb(66,157,209);
+  color: @male-color;
 }
 
 .female-verse-icon {
-  color: rgb(234,76,137);
+  color: @female-color;
+}
+
+.female-verse {
+  background:lighten(@female-color, 30%);
+}
+
+.male-verse {
+  background: lighten(@male-color, 30%);
+}
+
+.user-verse {
+  background: lighten(@user-color, 30%);
 }
 
 // .speech-bubble {
