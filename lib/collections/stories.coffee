@@ -22,32 +22,8 @@ _addChapterToStoryAndReturnStory = (storyObj, starterId, starterText) ->
   newChapter.updatedAt = new Date()
 
 Meteor.methods
-  addVerseToStoryAndUpdateStory: (params) ->
-    user = Meteor.user()
-    # Validate that the story exists and the user is a part to it.
-    # story = Stories.findOne(params.storyId, userIds: {$elemMatch: user._id} })
-    story = Stories.findOne(params.storyId)
-    console.log "Story:" + story
-
-    # Construct the verse
-    verse = {}
-    verse.author = user._id
-    verse.reader = _.without(story.userIds, [user._id])[0]
-    if Meteor.isServer
-      verse.gender = user.services.facebook.gender
-    verse.createdAt = new Date()
-    verse.text = params.verseText
-    
-    # Add the verse to the last chapter on the story
-    i = _.size(story.chapters) - 1
-    story.chapters[i].verses.push(verse)
-    # Save the edits to the database
-    Stories.update({_id: story._id}, {$set: {chapters: story.chapters} })
-
-    # Stories.update({_id: storyId}, {chapters: {position: i} })
-
   # params: userIds, starterId, starterText
-  createStoryFromUsersAndStarter = (params) ->
+  createStoryFromUsersAndStarter: (params) ->
     newStory =
       userIds: params.userIds
       chapters: []
