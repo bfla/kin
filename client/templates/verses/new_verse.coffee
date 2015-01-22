@@ -18,7 +18,8 @@ Template.newVerse.events
   "submit form": (e) ->
     e.preventDefault()
     params = {}
-    params.storyId = this.storyId
+    params.storyId = Session.get('storyId')
+    console.log params.storyId
     params.verseText = $(e.target).find("[name=text]").val()
     Meteor.call 'addVerseToStoryAndUpdateStory', params, (err, result) ->
       if (err)

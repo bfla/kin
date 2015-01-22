@@ -25,20 +25,24 @@ Meteor.methods
   addVerseToStoryAndUpdateStory: (params) ->
     user = Meteor.user()
     # Validate that the story exists and the user is a part to it.
-    story = Stories.find({_id: params.storyId, userIds: {$elemMatch: user._id} })
+    # story = Stories.findOne(params.storyId, userIds: {$elemMatch: user._id} })
+    story = Stories.findOne(params.storyId)
+    console.log "Story:" + story
 
     # Construct the verse
     verse = {}
     verse.author = user._id
-    verse.receiver = _.without(story.userIds, [user._id])[0]
-    verse.gender = user.services.facebook.gender
+    verse.reader = _.without(story.userIds, [user._id])[0]
+    if Meteor.isServer
+      verse.gender = user.services.facebook.gender
     verse.createdAt = new Date()
     verse.text = params.verseText
     
     # Add the verse to the last chapter on the story
-    i = story.chapters.count() - 1
+    i = _.size(story.chapters) - 1
     story.chapters[i].verses.push(verse)
-    story.update({_id: story._id}, {chapters: story.chapters})
+    # Save the edits to the database
+    Stories.update({_id: story._id}, {$set: {chapters: story.chapters} })
 
     # Stories.update({_id: storyId}, {chapters: {position: i} })
 
