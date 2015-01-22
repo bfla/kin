@@ -8,7 +8,7 @@ Checkins.attachSchema(Schema.Checkin) # Validate the Story against our schema
   # Figure out how to validate this against the SimpleSchema
 
 Meteor.methods.checkinInsert = (checkinAttributes) ->
-  userId = Meteor.userId() # Only the user can edit edit their checkin data
+  user = Meteor.user() # Only the user can edit edit their checkin data
   # It must have a latitude and longitude
   check checkinAttributes, 
     latitude: Number
@@ -21,7 +21,8 @@ Meteor.methods.checkinInsert = (checkinAttributes) ->
 
   # Build the checkin object
   checkin = checkinAttributes
-  checkin.userId = userId
+  checkin.userId = user._id
+  checkin.gender = user.services.facebook.gender
   checkin.updatedAt = new Date()
   checkin.createdAt = new Date()
 

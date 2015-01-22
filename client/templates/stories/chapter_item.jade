@@ -1,2 +1,8 @@
 template(name="chapterItem")
-  p=starter.text
+  .col-md-6.col-md-offset-3
+    +starterItem starter
+    each verses
+      +verseItem
+    //- +
+    //- i.fa.fa-question.fa-4x.starter-icon
+    //- | {{starter.text}}

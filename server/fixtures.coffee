@@ -38,11 +38,11 @@ if Meteor.users.find().count() is 0
   # brianId = Meteor.users.insert(profile:
   #   name: "Brian"
   # )
-  platoId = Meteor.users.insert
+  salomeId = Meteor.users.insert
     # _id: "rjEwi8HCLGnwC3NHJ"
     createdAt: new Date() #ISODate("2015-01-10T18:03:16.962Z")
     profile:
-      name: "Plato Flaherty"
+      name: "Lou Salome"
 
     services:
       facebook:
@@ -50,11 +50,11 @@ if Meteor.users.find().count() is 0
         expiresAt: 1426096995822
         id: "1617711891785708"
         email: "brian@getcamphero.com"
-        name: "Plato Flaherty"
-        first_name: "Plato"
-        last_name: "Flaherty"
+        name: "Lou Salome"
+        first_name: "Lou"
+        last_name: "Salome"
         link: "https://www.facebook.com/app_scoped_user_id/1617711891785708/"
-        gender: "male"
+        gender: "female"
         locale: "en_US"
 
       resume:
@@ -68,10 +68,10 @@ if Meteor.users.find().count() is 0
   if Meteor.users.find().count < 2
     console.log "Failed to add fixture users. Update da fixtures."
   
-  # platoId = Meteor.users.insert(profile:
+  # salomeId = Meteor.users.insert(profile:
   #   name: "Plato"
   # )
-  plato = Meteor.users.findOne(platoId)
+  salome = Meteor.users.findOne(salomeId)
 
   brianCheckinId = Checkins.insert
     userId: brianId
@@ -83,8 +83,8 @@ if Meteor.users.find().count() is 0
         type: "Point"
         coordinates: [42.2814, -83.7483]
 
-  platoCheckinId = Checkins.insert
-    userId: platoId
+  salomeCheckinId = Checkins.insert
+    userId: salomeId
     createdAt: new Date()
     updatedAt: new Date()
     geojson:
@@ -264,8 +264,9 @@ if Meteor.users.find().count() is 0
 
   # Build a verse for the story fixture
   exampleVerse = {}
-  exampleVerse.author = platoId
+  exampleVerse.author = salomeId
   exampleVerse.reader = brianId
+  exampleVerse.gender = salome.services.facebook.gender
   exampleVerse.text = "Yes.  Plutocracy is the only system worth considering."
   exampleVerse.createdAt = new Date()
 
@@ -278,7 +279,7 @@ if Meteor.users.find().count() is 0
   exampleChapter.createdAt = new Date()
   exampleChapter.updatedAt = new Date()
   exampleChapter.starter = starterAttrs
-  exampleChapter.verses = [exampleVerse, exampleVerse]
+  exampleChapter.verses = [exampleVerse]
   console.log JSON.stringify(exampleChapter, null, 4)
 
   # console.log "fixtureChapter.starter validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "starter")
@@ -297,7 +298,7 @@ if Meteor.users.find().count() is 0
   # obj = new Object()
 
   storyAttrs = 
-    userIds: [brianId, platoId]
+    userIds: [brianId, salomeId]
     checkedBy: []
     rejectedBy: []
     newMatch: true

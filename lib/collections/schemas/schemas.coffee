@@ -59,6 +59,9 @@ Schema.Story = new SimpleSchema
     type: String
   "chapters.$.verses.$.reader":
     type: String
+  "chapters.$.verses.$.gender":
+    type: String
+    allowedValues: ["male", "female"]
   "chapters.$.verses.$.text":
     type: String
   "chapters.$.verses.$.createdAt":
@@ -114,6 +117,9 @@ Schema.Verse = new SimpleSchema
 Schema.Checkin = new SimpleSchema
   userId:
     type: String
+  gender:
+    type: String
+    allowedValues: ["male", "female"]
   createdAt:
     type: Date
   updatedAt:
