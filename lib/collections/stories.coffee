@@ -6,6 +6,11 @@
 @Stories = new Mongo.Collection('stories')
 Stories.attachSchema(Schema.Story) # Validate the Story against our schema
 
+Stories.allow
+  update: (userId, story) -> return userIsAnOwnerOfDocument(userId, story)
+
+# redFlag - this should whitelist which paramters a user can and cannot update...
+
 Meteor.methods.createStoryFromUsersAndStarter = (userIds, starterId, starterText) ->
     # check options.users[0], String
     # check storyAttributes.users[1] String
@@ -52,7 +57,7 @@ _addVerseToStoryAndReturnStory = (storyId, userId, verseText) ->
 
   story = Stories.find({_id: storyId})
 
-Meteor.methods.addVerseToStoryAndUpdateStory = (storyId, userId, verseText) ->
+addVerseToStoryAndUpdateStory = (storyId, userId, verseText) ->
   story = Stories.find({_id: storyId, userIds: {$elemMatch: userId} })
   story = _addVerseToStoryAndReturnStory(storyId, userId, verseText)
 

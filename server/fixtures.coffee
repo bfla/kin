@@ -197,13 +197,20 @@ if Meteor.users.find().count() is 0
   #   receiver: plato._id
   #   createdAt: new Date(now - 12 * 3600 * 1000)
 
-  Starters.insert
-    text: 'Should prosecutors press charges against General Patreus?'
+  starterAttrs =
+    text: 'Is capitalism merely a form of indentured servitude?'
     connectionLevel: 1
     createdAt: new Date()
     updatedAt: new Date()
-    # typology:'guardians'
-    # topic:'currentEvents'
+
+  starterId = Starters.insert(starterAttrs)
+  starter = Starters.find({text: 'Is capitalism merely a form of indentured servitude?'})
+  console.log "Starter: " + starter
+  starterIsValid = Schema.Verse.namedContext().validate(starter)
+  console.log "Starter fixture is invalid" unless starterIsValid
+
+  #starter1._id = starter1Id
+
   Starters.insert
     text: 'What\'s the most awesome place you\'ve ever traveled to?'
     connectionLevel: 1
@@ -253,6 +260,54 @@ if Meteor.users.find().count() is 0
     updatedAt: new Date()
     # typology:'analysts'
     # topic:'socialTheory'
-  if Starters.find().count < 8
-    console.log "Failed to add fixture starters. Update da fixtures."
+  console.log "Failed to add fixture starters. Update da fixtures." if Starters.find().count < 8
+
+  # Build a verse for the story fixture
+  exampleVerse = {}
+  exampleVerse.author = platoId
+  exampleVerse.reader = brianId
+  exampleVerse.text = "Yes.  Plutocracy is the only system worth considering."
+  exampleVerse.createdAt = new Date()
+
+  verseIsValid = Schema.Verse.namedContext().validate(exampleVerse)
+  console.log "Verse fixture is invalid" unless verseIsValid
+
+  # Build a chapter for the story fixture
+  # redFlag - the schema is refusing to add this chapter...
+  exampleChapter = {}
+  exampleChapter.createdAt = new Date()
+  exampleChapter.updatedAt = new Date()
+  exampleChapter.starter = starterAttrs
+  exampleChapter.verses = [exampleVerse, exampleVerse]
+  console.log JSON.stringify(exampleChapter, null, 4)
+
+  # console.log "fixtureChapter.starter validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "starter")
+  # console.log "fixtureChapter.createdAt validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "createdAt")
+  # console.log "fixtureChapter.updatedAt validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "updatedAt")
+  # console.log "fixtureChapter.verses validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "verses")
+  chapterIsValid = Schema.Chapter.namedContext().validate(exampleChapter)
+  console.log "Chapter fixture is invalid" unless chapterIsValid
+  # console.log Match.test(exampleChapter, Schema.Chapter)
+  # console.log check(exampleChapter, Schema.Chapter)
+  # console.log "Chapter:" + exampleChapter
+  # console.log "chapter.createdAt" + exampleChapter.createdAt
+  # console.log "chapter.verses" + exampleChapter.verses
+  # console.log "chapter.starter" + exampleChapter.starter.text
+  # console.log "first verse:" + exampleChapter.verses[0].text
+  # obj = new Object()
+
+  storyAttrs = 
+    userIds: [brianId, platoId]
+    checkedBy: []
+    rejectedBy: []
+    newMatch: true
+    usersAreKin: false
+    createdAt: new Date()
+    updatedAt: new Date()
+    latestChapterAddedAt: new Date()
+    latestStarterAddedAt: new Date()
+    chapters: [exampleChapter]
+  Stories.insert storyAttrs
+
+
 

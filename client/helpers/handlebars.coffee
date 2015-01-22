@@ -10,3 +10,4 @@ Handlebars.registerHelper 'appName', () ->
   # rendevous
   # vibe
   # tidal - already taken by some stupid music app
+  # SpillIt

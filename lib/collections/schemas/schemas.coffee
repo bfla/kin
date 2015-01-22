@@ -32,20 +32,58 @@ Schema.Story = new SimpleSchema
   
   # Chapters
   chapters: 
-    type: [Schema.Chapter] # This might not be right...
+    # redFlag - This should check against the chapter schema but...
+    # the chapter schema is broken so 
+    type: [Object]
+  "chapters.$.createdAt":
+    type: Date
+  "chapters.$.updatedAt":
+    type: Date
+  "chapters.$.starter":
+    type: Object
+  "chapters.$.starter._id":
+    type: String
+    optional: true
+  "chapters.$.starter.text":
+    type: String
+  "chapters.$.starter.connectionLevel":
+    type: Number
+  "chapters.$.starter.createdAt":
+    type: Date
+  "chapters.$.starter.updatedAt":
+    type: Date
+  "chapters.$.verses":
+    type: [Object]
+    optional: true
+  "chapters.$.verses.$.author":
+    type: String
+  "chapters.$.verses.$.reader":
+    type: String
+  "chapters.$.verses.$.text":
+    type: String
+  "chapters.$.verses.$.createdAt":
+    type: Date
+  # "chapters.$":
+    # type: Schema.Chapter
 
 Schema.Chapter = new SimpleSchema
-  starter: 
-    type: Schema.Starter
   createdAt:
     type: Date
   updatedAt:
     type: Date
-  verses: 
-    type: [Schema.Verse] # This might not be right...
+  starter:
+    type: Schema.Starter
+  verses:
+    type: [Schema.Verse]
+    optional: true
+  # "verses.$":
+  #   type: Schema.Verse
+  #   optional: true
 
-  
 Schema.Starter = new SimpleSchema
+  _id:
+    type: String
+    optional: true
   text:
     type: String
     regEx: /([^\s]*)/
@@ -62,10 +100,10 @@ Schema.Starter = new SimpleSchema
 Schema.Verse = new SimpleSchema
   author:
     type: String
-    label: "The user who authored the verse (message)"
+    label: "The id of the user who authored the verse (message)"
   reader:
     type: String
-    label: "The user who received the verse (message)"
+    label: "The id of user who received the verse (message)"
   text:
     type: String
     regEx: /([^\s]*)/
@@ -92,6 +130,3 @@ Schema.Checkin = new SimpleSchema
     allowedValues: ["Point"]
   "geojson.$.geometry.$.coordinates":
     type: [Object]
-
-
-
