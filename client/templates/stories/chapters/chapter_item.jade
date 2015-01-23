@@ -10,3 +10,8 @@ template(name="chapterItem")
     .row
       .col-md-6.col-md-offset-3.pad-top-md
         +newVerse
+  if isWaitingForResponse
+    .row
+      .col-md-6.col-md-offset-3.pad-top-md
+        p.text-center.text-muted 
+          small Waiting for response...

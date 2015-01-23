@@ -1,10 +1,10 @@
 Router.configure
   layoutTemplate: 'layout'
-  loadingTemplate: 'loading'
   notFoundTemplte: 'notFound'
 
 matcherOptions = {}
 matcherOptions.template = 'nearbyMatches'
+matcherOptions.loadingTemplate = 'loading'
 matcherOptions.waitOn = () -> Meteor.subscribe('getMatchesNearby', Meteor.userId() )
 matcherOptions.stories = () ->
   # redFlag - this is returning the wrong data...

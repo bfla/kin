@@ -1,3 +1,10 @@
 template(name="storyItem")
-  each sortedChapters
-    +chapterItem
+  each chaptersToDisplay
+    if this
+      +chapterItem
+  if shouldShowDisplayMoreButton
+    .row
+      .col-md-6.col-md-offset-3.pad-top-md
+        p.text-center
+          a#show-more-verses(href="#") Show more
+
