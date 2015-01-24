@@ -9,3 +9,12 @@
 # Fix it later. Haha.
 
   # lastLocation = Meteor.user().lastLocation #Returns geojson
+
+# Do not allow users to edit their data.
+Meteor.users.deny 
+  update: () -> 
+    return true
+
+
+
+

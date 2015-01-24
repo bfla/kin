@@ -29,4 +29,4 @@ requireLogin = () ->
     this.next()
 
 # Router.onBeforeAction(requireLogin, {only: 'newMessage'})
-Router.onBeforeAction(requireLogin, {except: []})
+Router.onBeforeAction(requireLogin, {only: ['nearbyMatches']})

@@ -211,58 +211,7 @@ if Meteor.users.find().count() is 0
   starterIsValid = Schema.Verse.namedContext().validate(starter)
   console.log "Starter fixture is invalid" unless starterIsValid
 
-  #starter1._id = starter1Id
-
-  Starters.insert
-    text: 'What\'s the most awesome place you\'ve ever traveled to?'
-    connectionLevel: 1
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'explorers' 
-    # topic:'travel'
-  Starters.insert
-    text: 'What causes you to feel Eudomonia (feeling happy and melancholy at the same time)?'
-    connectionLevel: 1
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'dreamers' 
-    # topic:'emotions'
-  Starters.insert
-    text: 'Is capitalism merely a form indentured servitude? What might be a better system?'
-    connectionLevel: 2
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'analysts' 
-    # topic:'socialTheory'
-  Starters.insert
-    text: 'Should prosecutors press charges against General Patreus?'
-    connectionLevel: 2
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'guardians' 
-    # topic:'news'
-  Starters.insert
-    text: 'Describe in detail the best orgasm you\'ve ever had'
-    connectionLevel: 2
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'explorers' 
-    # topic:'travel'
-  Starters.insert
-    text: 'Should I try LSD?'
-    connectionLevel: 3
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'dreamers'
-    # topic:'reality'
-  Starters.insert
-    text: 'Pros and cons of humanistic athiesm vs. other belief systems?'
-    connectionLevel: 3
-    createdAt: new Date()
-    updatedAt: new Date()
-    # typology:'analysts'
-    # topic:'socialTheory'
-  console.log "Failed to add fixture starters. Update da fixtures." if Starters.find().count < 8
+  seedStarters()
 
   # Build a verse for the story fixture
   exampleVerse = {}
@@ -282,22 +231,9 @@ if Meteor.users.find().count() is 0
   exampleChapter.updatedAt = new Date()
   exampleChapter.starter = starterAttrs
   exampleChapter.verses = [exampleVerse]
-  console.log JSON.stringify(exampleChapter, null, 4)
 
-  # console.log "fixtureChapter.starter validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "starter")
-  # console.log "fixtureChapter.createdAt validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "createdAt")
-  # console.log "fixtureChapter.updatedAt validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "updatedAt")
-  # console.log "fixtureChapter.verses validity:" + Schema.Chapter.namedContext().validateOne(exampleChapter, "verses")
   chapterIsValid = Schema.Chapter.namedContext().validate(exampleChapter)
   console.log "Chapter fixture is invalid" unless chapterIsValid
-  # console.log Match.test(exampleChapter, Schema.Chapter)
-  # console.log check(exampleChapter, Schema.Chapter)
-  # console.log "Chapter:" + exampleChapter
-  # console.log "chapter.createdAt" + exampleChapter.createdAt
-  # console.log "chapter.verses" + exampleChapter.verses
-  # console.log "chapter.starter" + exampleChapter.starter.text
-  # console.log "first verse:" + exampleChapter.verses[0].text
-  # obj = new Object()
 
   storyAttrs = 
     userIds: [brianId, salomeId]

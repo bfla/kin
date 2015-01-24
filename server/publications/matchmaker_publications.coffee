@@ -1,5 +1,5 @@
 Meteor.publish 'getMatchesNearby', (userId) ->
-  check(userId, String)
+  # check(userId, String)
   # Now, return the updated list of the user's stories
   # stories = Stories.find
   #   userIds: {$elemMatch: userId}
@@ -9,4 +9,5 @@ Meteor.publish 'getMatchesNearby', (userId) ->
   # if stories.count < 10
   #   Meteor.call 'generateNewMatchesNearby', null, () ->
   #     # I don't care.
-  return Stories.find()
+  stories = Stories.find()
+  return stories
