@@ -13,10 +13,9 @@ matcherOptions.stories = () ->
   return stories
 matcherOptions.data = () -> {stories: matcherOptions.stories()}
 
-Router.route '/', matcherOptions
+Router.route '/', _.extend(matcherOptions, {name: 'home'})
 
-matcherOptions.name = 'nearbyMatches'
-Router.route '/nearbyMatches', matcherOptions
+Router.route '/nearbyMatches', _.extend(matcherOptions, {name: 'nearbyMatches'})
 
 requireLogin = () ->
   if !Meteor.user()
@@ -29,4 +28,4 @@ requireLogin = () ->
     this.next()
 
 # Router.onBeforeAction(requireLogin, {only: 'newMessage'})
-Router.onBeforeAction(requireLogin, {only: ['nearbyMatches']})
+Router.onBeforeAction(requireLogin, {only: ['nearbyMatches', 'home']})

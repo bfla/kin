@@ -12,16 +12,16 @@
 
 # # 'Logging out' also includes closing the browser
 # UserStatus.events.on "connectionLogout", (fields) ->
-Accounts.onLogin ()->
-  # redFlag...  We should use the userId but meteor won't let us use Meteor.user() here!!!
-  Meteor.call 'logLoginToConsole', null, (err, result) ->
-    return true
+# Accounts.onLogin ()->
+#   # redFlag...  We should use the userId but meteor won't let us use Meteor.user() here!!!
+#   Meteor.call 'logLoginToConsole', null, (err, result) ->
+#     return true
 
-Accounts.onLoginFailure ()->
-  Meteor.call "logFailedSigninAttempt", null, (err, result) ->
-    return true
+# Accounts.onLoginFailure ()->
+#   Meteor.call "logFailedSigninAttempt", null, (err, result) ->
+#     return true
 
-Accounts.onCreateUser ()->
-  EventTracker.trackSignup()
-  Meteor.call 'logSignupToConsole', null, (err, result) ->
-    return true
+# Accounts.onCreateUser ()->
+#   EventTracker.trackSignup()
+#   Meteor.call 'logSignupToConsole', null, (err, result) ->
+#     return true
