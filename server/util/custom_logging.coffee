@@ -13,9 +13,13 @@
 Meteor.methods
   logError: (params) ->
     # Takes params.errorText and params.errorObj
+    if Meteor.user()
+      params.obj = _.extend(params.obj, {user: {_id: Meteor.userId() }})
     Meteor.log.error("Error: " + params.text, params.obj)
     return true
   logInfo: (params) ->
+    if Meteor.user()
+      params.obj = _.extend(params.obj, {user: {_id: Meteor.userId() }})
     Mateor.log.info(params.text, params.obj)
     return true
   logLoginToConsole: () ->
