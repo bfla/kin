@@ -20,8 +20,7 @@ UserStatus.events.on "connectionActive", (fields) ->
   Meteor.call 'logInfo', params, (err, result) ->
     return
 
-# # 'Logging out' also includes closing the browser
-# UserStatus.events.on "connectionLogout", (fields) ->
+# User Accounts ####################################################################################################
 
 Accounts.onLogin ()->
   # redFlag...  We should use the userId but meteor won't let us use Meteor.user() here!!!
@@ -36,3 +35,5 @@ Accounts.onCreateUser ()->
   EventTracker.trackSignup()
   Meteor.call 'logSignupToConsole', null, (err, result) ->
     return true
+
+# Model Events ####################################################################################################

@@ -9,11 +9,19 @@ EventTracker.trackEvent = (name, properties) ->
 
 EventTracker.trackLoginOrSignup = () ->
   _attemptToIdentifyUser()
-  analytics.track 'Login', {service: 'Facebook'}
+  
+  properties = {}
+  properties.service = 'Facebook'
+  
+  analytics.track 'Login', properties
 
 EventTracker.trackSignup = () ->
   _attemptToIdentifyUser()
-  analytics.track 'Signup', {service: 'Facebook'}
+  
+  properties = {}
+  properties.service = 'Facebook'
+
+  analytics.track 'Signup', properties
 
 EventTracker.trackLogout = () ->
   _attemptToIdentifyUser()
@@ -31,34 +39,7 @@ _attemptToIdentifyUser = () ->
       console.log "GENDER: " + gender
   else
     gender = user.services.facebook.gender
-
-
-
-# # Track Pageviews
-# Router.onRun ()->
-#   analytics.page()
-
-# Track the user's identity
-# Meteor.startup ()->
-#   Tracker.autorun (c) ->
-#     # waiting for user subscription to load
-#     # unless Router.current() || Router.current().ready()
-#     #   return
-#     user = Meteor.user()
-#     if !user
-#       return
-
-#     if Meteor.isClient
-#       userData = Meteor.subscribe 'userData', user._id
-#       console.log 'userData: ' + JSON.stringify(userData)
-#       gender = userData.services.facebook.gender
-#       console.log "GENDER: " + gender
-#     else
-#       gender = user.services.facebook.gender
-
-#     analytics.identify user._id,
-#       gender: user.profile.gender
-#       # lastLocation: user.profile.lastLocation
-#       email: user.emails[0].address
-
-#     c.stop()
+  
+  analytics.identify user._id,
+    gender: gender
+    # lastLocation

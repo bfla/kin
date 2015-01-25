@@ -19,8 +19,15 @@ Template.newVerse.events
     e.preventDefault()
     params = {}
     params.storyId = Session.get('storyId')
-    console.log params.storyId
     params.verseText = $(e.target).find("[name=text]").val()
+    # Track the click
+    EventTracker.trackEvent("Submit verse", {story: {_id: params.storyId}})
+    # Log the submission
+    Meteor.log.info "User attempted to submit verse",
+      user: {_id: Meteor.user()._id} 
+      story: {_id: params.storyId}
+      verseText: params.verseText
+    # Save it to the database
     Meteor.call 'addVerseToStoryAndUpdateStory', params, (err, result) ->
       if (err)
         return throwError(err.reason)
