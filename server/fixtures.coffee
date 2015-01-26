@@ -209,10 +209,12 @@ if Meteor.users.find().count() is 0
   # starterId = Starters.insert(starterAttrs)
   # starter = Starters.find({text: 'Is capitalism merely a form of indentured servitude?'})
   starter = Starters.findOne()
-  console.log "Starter: " + starter
-  starterIsValid = Schema.Verse.namedContext().validate(starter)
-  console.log "Starter fixture is invalid" unless starterIsValid
+  # console.log "Starter: " + starter
+  # starterIsValid = Schema.Verse.namedContext().validate(starter)
+  # console.log "Starter fixture is invalid" unless starterIsValid
 
+
+  # This is the story fixture ======================================================================
   # Build a verse for the story fixture
   exampleVerse = {}
   exampleVerse.author = salomeId
@@ -221,8 +223,8 @@ if Meteor.users.find().count() is 0
   exampleVerse.text = "Yes.  Plutocracy is the only system worth considering."
   exampleVerse.createdAt = new Date()
 
-  verseIsValid = Schema.Verse.namedContext().validate(exampleVerse)
-  console.log "Verse fixture is invalid" unless verseIsValid
+  # verseIsValid = Schema.Verse.namedContext().validate(exampleVerse)
+  # console.log "Verse fixture is invalid" unless verseIsValid
 
   # Build a chapter for the story fixture
   # redFlag - the schema is refusing to add this chapter...
@@ -233,8 +235,8 @@ if Meteor.users.find().count() is 0
   # exampleChapter.starter = starterAttrs
   exampleChapter.verses = [exampleVerse]
 
-  chapterIsValid = Schema.Chapter.namedContext().validate(exampleChapter)
-  console.log "Chapter fixture is invalid" unless chapterIsValid
+  # chapterIsValid = Schema.Chapter.namedContext().validate(exampleChapter)
+  # console.log "Chapter fixture is invalid" unless chapterIsValid
 
   storyAttrs = 
     userIds: [brianId, salomeId]
@@ -248,6 +250,41 @@ if Meteor.users.find().count() is 0
     latestStarterAddedAt: new Date()
     chapters: [exampleChapter]
   Stories.insert storyAttrs
+
+
+  # This is another story fixture ======================================================================
+  otherVerse = {}
+  otherVerse.author = salomeId
+  otherVerse.reader = brianId
+  otherVerse.gender = salome.services.facebook.gender
+  otherVerse.text = "Um. I honestly don't know! What do you think?"
+  otherVerse.createdAt = new Date()
+
+  otherVerse2 = {}
+  otherVerse2.author = brianId
+  otherVerse2.reader = salomeId
+  otherVerse2.gender = brian.services.facebook.gender
+  otherVerse2.text = "Me neither!"
+  otherVerse2.createdAt = new Date()
+
+  otherChapter = {}
+  otherChapter.createdAt = new Date()
+  otherChapter.updatedAt = new Date()
+  otherChapter.starter = starter
+  otherChapter.verses = [otherVerse, otherVerse2]
+
+  otherStoryAttrs = 
+    userIds: [brianId, salomeId]
+    checkedBy: []
+    rejectedBy: []
+    newMatch: true
+    usersAreKin: false
+    createdAt: new Date()
+    updatedAt: new Date()
+    latestChapterAddedAt: new Date()
+    latestStarterAddedAt: new Date()
+    chapters: [otherChapter]
+  Stories.insert otherStoryAttrs
 
 
 
