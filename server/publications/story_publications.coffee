@@ -1,6 +1,7 @@
 Meteor.publish 'storiesForUser', () ->
-  return Stories.find({userIds: {$elemMatch: this.userId}})
+  # return Stories.find()
+  return Stories.find({userIds: this.userId}, {sort: {updatedAt: 1}})
 
-Meteor.publish 'storyItem', (storyId) ->
+Meteor.publish 'storyItemForUser', (storyId) ->
   check(id, String)
-  return Stories.findOne(_id: storyId, {userIds: {$elemMatch: this.userId}})
+  return Stories.findOne({_id: storyId, userIds: this.userId})
