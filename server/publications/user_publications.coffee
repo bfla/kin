@@ -5,6 +5,15 @@
 #   Meteor.users.find {status: active}
 
 # Publish the user's gender in a 'userData' subscription
-Meteor.publish "userData", (userId) ->
-  data = Meteor.users.find {_id: userId}, {fields: {'services.facebook.gender': 1} }
-  return data
+# redFlag - this is busted.
+# Meteor.publish "userData", (userId) ->
+#   fields = {}
+#   fields =
+#     services: 1
+#     'services.facebook': 1
+#     'services.facebook.gender': 1
+
+
+#   data = Meteor.users.find {_id: userId}, {fields: fields}
+#   console.log "data: " + JSON.stringify(data)
+#   return data

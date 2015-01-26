@@ -199,19 +199,19 @@ if Meteor.users.find().count() is 0
   #   receiver: plato._id
   #   createdAt: new Date(now - 12 * 3600 * 1000)
 
-  starterAttrs =
-    text: 'Is capitalism merely a form of indentured servitude?'
-    connectionLevel: 1
-    createdAt: new Date()
-    updatedAt: new Date()
+  seedStarters()
+  # starterAttrs =
+  #   text: 'Is capitalism merely a form of indentured servitude?'
+  #   connectionLevel: 1
+  #   createdAt: new Date()
+  #   updatedAt: new Date()
 
-  starterId = Starters.insert(starterAttrs)
-  starter = Starters.find({text: 'Is capitalism merely a form of indentured servitude?'})
+  # starterId = Starters.insert(starterAttrs)
+  # starter = Starters.find({text: 'Is capitalism merely a form of indentured servitude?'})
+  starter = Starters.findOne()
   console.log "Starter: " + starter
   starterIsValid = Schema.Verse.namedContext().validate(starter)
   console.log "Starter fixture is invalid" unless starterIsValid
-
-  seedStarters()
 
   # Build a verse for the story fixture
   exampleVerse = {}
@@ -229,7 +229,8 @@ if Meteor.users.find().count() is 0
   exampleChapter = {}
   exampleChapter.createdAt = new Date()
   exampleChapter.updatedAt = new Date()
-  exampleChapter.starter = starterAttrs
+  exampleChapter.starter = starter
+  # exampleChapter.starter = starterAttrs
   exampleChapter.verses = [exampleVerse]
 
   chapterIsValid = Schema.Chapter.namedContext().validate(exampleChapter)

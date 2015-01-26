@@ -12,7 +12,7 @@ EventTracker.trackLoginOrSignup = () ->
   
   properties = {}
   properties.service = 'Facebook'
-  
+
   analytics.track 'Login', properties
 
 EventTracker.trackSignup = () ->
@@ -32,14 +32,17 @@ _attemptToIdentifyUser = () ->
   if !user
     return
 
-  if Meteor.isClient
-      userData = Meteor.subscribe 'userData', user._id
-      console.log 'userData: ' + JSON.stringify(userData)
-      gender = userData.services.facebook.gender
-      console.log "GENDER: " + gender
-  else
-    gender = user.services.facebook.gender
+  # if Meteor.isClient
+  #     userData = Meteor.subscribe 'userData', user._id
+  #     console.log 'userData: ' + JSON.stringify(userData)
+  #     gender = userData.services.facebook.gender
+  #     console.log "GENDER: " + gender
+  # else
+  #   gender = user.services.facebook.gender
   
+  # redFlag I'm not tracking any demographic data :(
   analytics.identify user._id,
-    gender: gender
-    # lastLocation
+    name: user.profile.name
+    createdAt: user.createdAt
+  # gender: gender
+  # lastLocation
