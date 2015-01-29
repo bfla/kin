@@ -1,0 +1,15 @@
+template(name="storyFeedItem")
+  //- p=updatedAt
+  //- p=createdAt
+  //- p=userIds
+  .row.pad-top-md 
+    a.story-feed-item(href="{{pathFor 'storyDetail'}}")
+      .col-md-offset-3.col-md-1
+        i.fa.fa-question-circle.fa-2x.pull-right
+      .col-md-3
+        =verseText
+        br
+        small.text-muted
+          small {{prettifyDate updatedAt}}
+      .col-md-1
+        i.fa.fa-chevron-right.fa-2x.pull-left

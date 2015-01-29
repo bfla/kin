@@ -1,6 +1,7 @@
 Router.configure
   layoutTemplate: 'layout'
-  notFoundTemplte: 'notFound'
+  loadingTemplate: 'loading'
+  notFoundTemplate: 'notFound'
 
 matcherOptions = {}
 matcherOptions.template = 'nearbyMatches'
@@ -16,6 +17,30 @@ matcherOptions.data = () -> {stories: matcherOptions.stories()}
 Router.route '/', _.extend(matcherOptions, {name: 'home'})
 
 Router.route '/nearbyMatches', _.extend(matcherOptions, {name: 'nearbyMatches'})
+
+
+# Route for the 'history' view (with all of the user's stories)
+historyOptions = {}
+historyOptions.template = 'storyFeed'
+historyOptions.waitOn = () ->
+  Meteor.subscribe('storiesForUser')
+historyOptions.stories = () ->
+  return Meteor.subscribe('storiesForUser')
+Router.route '/history', historyOptions
+
+# Route for a single story of the user
+# storyFeedDetailOptions = {}
+# storyFeedDetailOptions.template = 'showStory'
+# historyOptions.waitOn = () -> 
+#   Meteor.subscribe('storyForUser', Meteor.userId() )
+# historyOptions.data = () -> {stories, historyOptions.stories() }
+storyDetailOptions = {}
+storyDetailOptions.name = 'storyDetail'
+storyDetailOptions.waitOn = () ->
+  return Meteor.subscribe('storyForUser', this.params._id)
+storyDetailOptions.data = () -> return Stories.findOne(this.params._id)
+Router.route('/stories/:_id', storyDetailOptions)
+
 
 requireLogin = () ->
   if !Meteor.user()
