@@ -5,3 +5,7 @@ Template.storyFeed.helpers
   #   stories = Meteor.subscribe('storiesForUser')
   #   console.log JSON.stringify(stories)
   #   return stories
+
+Template.storyFeed.events
+  'click .story-feed-item': (e) ->
+    $target = e.target

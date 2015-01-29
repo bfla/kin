@@ -34,6 +34,13 @@ Router.route '/history', historyOptions
 # historyOptions.waitOn = () -> 
 #   Meteor.subscribe('storyForUser', Meteor.userId() )
 # historyOptions.data = () -> {stories, historyOptions.stories() }
+storyDetailOptions = {}
+storyDetailOptions.name = 'storyDetail'
+storyDetailOptions.waitOn = () ->
+  return Meteor.subscribe('storyForUser', this.params._id)
+storyDetailOptions.data = () -> return Stories.findOne(this.params._id)
+Router.route('/stories/:_id', storyDetailOptions)
+
 
 requireLogin = () ->
   if !Meteor.user()
