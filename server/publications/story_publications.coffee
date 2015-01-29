@@ -3,5 +3,5 @@ Meteor.publish 'storiesForUser', () ->
   return Stories.find({userIds: this.userId}, {sort: {updatedAt: 1}})
 
 Meteor.publish 'storyForUser', (storyId) ->
-  check(id, String)
-  return Stories.findOne({_id: storyId, userIds: this.userId})
+  # check(id, String)
+  return Stories.find({_id: storyId, userIds: this.userId})
